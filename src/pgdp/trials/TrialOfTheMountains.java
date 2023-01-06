@@ -1,8 +1,6 @@
 package pgdp.trials;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class TrialOfTheMountains {
@@ -13,6 +11,18 @@ public class TrialOfTheMountains {
 
 	public static void assignBeasts(Mountain[] mountains) {
 		// TODO
+		for (Mountain m : mountains) {
+			Beast[] allBeasts = Beast.values();
+			List<Beast> allowedBeasts;
+			List<Beast> neighbourBeasts = new ArrayList<>();
+			for (Mountain n_m : m.neighbours) {
+				neighbourBeasts.add(n_m.beast);
+			}
+			allowedBeasts = Arrays.stream(allBeasts)
+					.filter(beast -> !neighbourBeasts.contains(beast))
+					.collect(Collectors.toList());
+			m.setBeast(allowedBeasts.size() > 0 ? allowedBeasts.get(0) : allBeasts[0]);
+		}
 	}
 
 	public static class Mountain {
