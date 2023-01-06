@@ -113,7 +113,16 @@ public class TrialOfTheSword {
 		public int computeIndex(int... idxs) {
 			checkValidIdxs(idxs);
 			// TODO
-			return -1;
+			int[] indexes = idxs;
+			int output = 0;
+			for (int i = 0; i < indexes.length; i++) {
+				if (i == indexes.length - 1) {
+					output += indexes[i];
+				} else {
+					output += indexes[i] * dims[i];
+				}
+			}
+			return output;
 		}
 
 		/**
@@ -164,5 +173,4 @@ public class TrialOfTheSword {
 		}
 		return acc;
 	}
-
 }
