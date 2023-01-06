@@ -1,5 +1,6 @@
 package pgdp.trials;
 
+import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -61,7 +62,17 @@ public class TrialOfTheGrasses {
 		 */
 		public Stream<TreeNode<T>> flatten() {
 			// TODO
-			return null;
+			Stream.Builder<TreeNode<T>> treeNodeBuilder = Stream.builder();
+			treeNodeBuilder.add(this);
+			Arrays.stream(nodes)
+					.forEach(childNode -> {
+						TreeNode<T> currentNode = childNode;
+						if (currentNode.nodes != null) {
+							Stream<TreeNode<T>> tempStream = currentNode.flatten();
+							tempStream.forEach(treeNodeBuilder::add);
+						}
+					});
+			return treeNodeBuilder.build();
 		}
 
 		@Override
