@@ -113,14 +113,15 @@ public class TrialOfTheSword {
 		public int computeIndex(int... idxs) {
 			checkValidIdxs(idxs);
 			// TODO
-			//Every value of idxs is multiplied by the dimensions value to the power of the dimension
+			//Every value of idxs is multiplied by the dimensions value to
+			// smallest dimensions value times this dimension
 			//values = {a000, a001, a010, a011, a100, a101, a110, a111}
 			//a011 means 0 * 3 + 1 * 2 + 1 * 1 = 3
 			int[] indexes = idxs;
 			int output = 0;
 			for (int i = 0; i < indexes.length; i++) {
 				int dimension = indexes.length - i - 1;
-				output += indexes[i] * (dims[dims.length - 1]) * dimension;//Math.pow((dims[dims.length - 1]), dimension);
+				output += indexes[i] * (dims[dims.length - 1]) * dimension;
 
 			}
 			//add last value
