@@ -113,6 +113,10 @@ public class TrialOfTheSword {
 		public int computeIndex(int... idxs) {
 			checkValidIdxs(idxs);
 			// TODO
+			if (dims.length == 1) {
+				int[] out = idxs;
+				return out[0];
+			}
 			int[] indexes = idxs;
 
 			//get number from last two dimensions
@@ -178,8 +182,8 @@ public class TrialOfTheSword {
 	}
 
 	public static void main(String[] args) {
-		FlatArray fa = new FlatArray(TrialOfTheSword.class, new int[]{3, 3, 3});
-		int n = fa.computeIndex(2, 2, 2);
+		FlatArray fa = new FlatArray(TrialOfTheSword.class, new int[]{3});
+		int n = fa.computeIndex(1);
 		System.out.println(n);
 	}
 }
