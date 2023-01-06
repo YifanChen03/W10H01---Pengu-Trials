@@ -119,7 +119,7 @@ public class TrialOfTheSword {
 				if (i == indexes.length - 1) {
 					output += indexes[i];
 				} else {
-					output += indexes[i] * dims[i];
+					output += indexes[i] * dims[dims.length - 1 - i];
 				}
 			}
 			return output;
@@ -173,4 +173,10 @@ public class TrialOfTheSword {
 		}
 		return acc;
 	}
+
+	/*public static void main(String[] args) {
+		FlatArray fa = new FlatArray(TrialOfTheSword.class, new int[]{3, 5, 6});
+		int n = fa.computeIndex(1, 3, 4);
+		System.out.println(n);
+	}*/
 }
