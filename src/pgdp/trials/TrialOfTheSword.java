@@ -113,14 +113,14 @@ public class TrialOfTheSword {
 		public int computeIndex(int... idxs) {
 			checkValidIdxs(idxs);
 			// TODO
+			//last value of idxs is just added
+			//Every value of idxs is multiplied by the dimension
+			//values = {a000, a001, a010, a011, a100, a101, a110, a111}
+			//a011 means 0 * 3 + 1 * 2 + 1 * 1 = 3
 			int[] indexes = idxs;
 			int output = 0;
 			for (int i = 0; i < indexes.length; i++) {
-				if (i == indexes.length - 1) {
-					output += indexes[i];
-				} else {
-					output += indexes[i] * dims[dims.length - 1 - i];
-				}
+				output += indexes[i] * (indexes.length - i);
 			}
 			return output;
 		}
@@ -175,8 +175,8 @@ public class TrialOfTheSword {
 	}
 
 	/*public static void main(String[] args) {
-		FlatArray fa = new FlatArray(TrialOfTheSword.class, new int[]{3, 5, 6});
-		int n = fa.computeIndex(1, 3, 4);
+		FlatArray fa = new FlatArray(TrialOfTheSword.class, new int[]{2, 2, 2});
+		int n = fa.computeIndex(0, 1, 1);
 		System.out.println(n);
 	}*/
 }
