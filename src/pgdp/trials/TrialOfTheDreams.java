@@ -1,5 +1,6 @@
 package pgdp.trials;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
@@ -40,7 +41,28 @@ public class TrialOfTheDreams {
 	 */
 	public static byte[] lockPick(Function<byte[], Boolean> lock, int maxlen) {
 		// TODO
-		return null;
+		Function<Byte[], Boolean> n_lock = new Function<Byte[], Boolean>() {
+			@Override
+			public Boolean apply(Byte[] bytes) {
+				byte[] tempByteArray = new byte[bytes.length];
+				for (int i = 0; i < bytes.length; i++) {
+					tempByteArray[i] = bytes[i].byteValue();
+				}
+				return lock.apply(tempByteArray);
+			}
+		};
+		List temp = lockPick(n_lock, new ArrayList<>(), maxlen);
+
+		if (temp == null) {
+			return null;
+		}
+
+		byte[] output = new byte[temp.size()];
+		for (int i = 0; i < temp.size(); i++) {
+			output[i] = (byte) temp.get(i);
+		}
+
+		return output;
 	}
 
 	private static List<Byte> lockPick(Function<Byte[], Boolean> lock, List<Byte> key, int maxlen) {

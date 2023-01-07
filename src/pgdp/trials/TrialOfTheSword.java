@@ -181,9 +181,9 @@ public class TrialOfTheSword {
 		return acc;
 	}
 
-	public static void main(String[] args) {
-		FlatArray fa = new FlatArray(TrialOfTheSword.class, new int[]{3});
-		int n = fa.computeIndex(1);
+	/*public static void main(String[] args) {
+		FlatArray fa = new FlatArray(TrialOfTheSword.class, new int[]{4, 3, 2});
+		int n = fa.computeIndex(2, 1, 1);
 		System.out.println(n);
-	}
+	}*/
 }
