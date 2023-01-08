@@ -66,11 +66,11 @@ public class TrialOfTheDreams {
 	private static List<Byte> lockPick(Function<Byte[], Boolean> lock, List<Byte> key, int maxlen) {
 		// TODO
 		Byte[] keyArray = key.toArray(new Byte[]{});
+		if (lock.apply(keyArray)) {
+			return key;
+		}
 		//stop if key.size() equals maxlen
-		if (key.size() > maxlen) {
-			if (lock.apply(keyArray)) {
-				return key;
-			}
+		if (key.size() >= maxlen) {
 			return null;
 		}
 		//byte can have value from -128 to 127
@@ -81,7 +81,7 @@ public class TrialOfTheDreams {
 					return possibleSolution;
 				}
 				key.remove(key.size() - 1);
-			}
+		}
 
 		return null;
 	}
