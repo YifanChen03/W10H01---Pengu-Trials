@@ -67,15 +67,14 @@ public class TrialOfTheDreams {
 		// TODO
 		Byte[] keyArray = key.toArray(new Byte[]{});
 		//stop if key.size() equals maxlen
-		if (key.size() == maxlen) {
+		if (key.size() >= maxlen) {
 			if (lock.apply(keyArray)) {
 				return key;
 			}
 			return null;
 		}
 		//byte can have value from -128 to 127
-		for (int i = 0; i < maxlen; i++) {
-			for (int byteValue = -128; byteValue <= 127; byteValue++) {
+		for (int byteValue = -128; byteValue <= 127; byteValue++) {
 				key.add((byte) byteValue);
 				List<Byte> possibleSolution = lockPick(lock, key, maxlen);
 				if (possibleSolution != null) {
@@ -83,7 +82,7 @@ public class TrialOfTheDreams {
 				}
 				key.remove(key.size() - 1);
 			}
-		}
+
 		return null;
 	}
 
