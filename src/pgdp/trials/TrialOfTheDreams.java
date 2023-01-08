@@ -41,16 +41,14 @@ public class TrialOfTheDreams {
 	 */
 	public static byte[] lockPick(Function<byte[], Boolean> lock, int maxlen) {
 		// TODO
-		Function<Byte[], Boolean> n_lock = new Function<Byte[], Boolean>() {
-			@Override
-			public Boolean apply(Byte[] bytes) {
-				byte[] tempByteArray = new byte[bytes.length];
-				for (int i = 0; i < bytes.length; i++) {
-					tempByteArray[i] = bytes[i].byteValue();
-				}
-				return lock.apply(tempByteArray);
+		Function<Byte[], Boolean> n_lock = bytes -> {
+			byte[] tempByteArray = new byte[bytes.length];
+			for (int i = 0; i < bytes.length; i++) {
+				tempByteArray[i] = bytes[i].byteValue();
 			}
+			return lock.apply(tempByteArray);
 		};
+
 		List temp = lockPick(n_lock, new ArrayList<>(), maxlen);
 
 		if (temp == null) {
@@ -67,6 +65,24 @@ public class TrialOfTheDreams {
 
 	private static List<Byte> lockPick(Function<Byte[], Boolean> lock, List<Byte> key, int maxlen) {
 		// TODO
+		Byte[] keyArray = key.toArray(new Byte[]{});
+		//stop if key.size() equals maxlen
+		if (key.size() == maxlen) {
+			if (lock.apply(keyArray)) {
+				return key;
+			}
+			return null;
+		}
+		//byte can have value from -128 to 127
+		for (int i = 0; i < maxlen; i++) {
+			for (int byteValue = -128; byteValue <= 127; byteValue++) {
+				key.add((byte) byteValue);
+				List<Byte> possibleSolution = lockPick(lock, key, maxlen);
+				if (possibleSolution != null) {
+					return possibleSolution;
+				}
+			}
+		}
 		return null;
 	}
 
