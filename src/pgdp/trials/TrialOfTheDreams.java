@@ -81,6 +81,7 @@ public class TrialOfTheDreams {
 				if (possibleSolution != null) {
 					return possibleSolution;
 				}
+				key.remove(key.size() - 1);
 			}
 		}
 		return null;
