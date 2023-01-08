@@ -67,7 +67,7 @@ public class TrialOfTheDreams {
 		// TODO
 		Byte[] keyArray = key.toArray(new Byte[]{});
 		//stop if key.size() equals maxlen
-		if (key.size() >= maxlen) {
+		if (key.size() > maxlen) {
 			if (lock.apply(keyArray)) {
 				return key;
 			}
