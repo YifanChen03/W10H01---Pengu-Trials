@@ -113,23 +113,15 @@ public class TrialOfTheSword {
 		public int computeIndex(int... idxs) {
 			checkValidIdxs(idxs);
 			// TODO
-			if (dims.length == 1) {
-				int[] out = idxs;
-				return out[0];
-			}
 			int[] indexes = idxs;
+			int output = indexes[0];
 
-			//get number from last two dimensions
-			int lastTwoNum = indexes[indexes.length - 2] * dims[indexes.length - 1] + indexes[indexes.length - 1] + 1;
-
-			//it's the #lastTwoNum Element of the next indexes dimension
-			for (int i = indexes.length - 3; i >= 0; i--) {
-				lastTwoNum = lastTwoNum * (indexes[i] + 1);
+			//element is the indexes[0]'s value times the next dimension... plus the next index of indexes
+			for (int i = 1; i < dims.length; i++) {
+				output *= output * dims[i] + indexes[i];
 			}
 
-			lastTwoNum--;
-
-			return lastTwoNum;
+			return output;
 		}
 
 		/**
