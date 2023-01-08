@@ -118,7 +118,7 @@ public class TrialOfTheSword {
 
 			//element is the indexes[0]'s value times the next dimension... plus the next index of indexes
 			for (int i = 1; i < dims.length; i++) {
-				output *= output * dims[i] + indexes[i];
+				output = output * dims[i] + indexes[i];
 			}
 
 			return output;
